@@ -19,6 +19,7 @@ public class ControlBottle : MonoBehaviour
     [SerializeField] private AnimationCurve scaleAndRorationCurve;
     [SerializeField] private AnimationCurve fillAmountCurve;
     [SerializeField] private AnimationCurve shadowCurve;
+    [SerializeField] private AnimationCurve thickCurve;
 
     private static float[] fillAmounts = new[] { -0.5f, -0.3f, -0.1f, 0.1f, 0.3f };
     private static float[] rotationValues = new[] { 54f, 71f, 83f, 90f };
@@ -59,6 +60,7 @@ public class ControlBottle : MonoBehaviour
             renderMask.material.SetFloat("_ScaleAndRotation",scaleAndRorationCurve.Evaluate(angleValue));
             renderMask.material.SetFloat("_FillAmount",fillAmountCurve.Evaluate(angleValue));
             renderMask.material.SetFloat("_Shadow",shadowCurve.Evaluate(angleValue));
+            renderMask.material.SetFloat("_Thick",thickCurve.Evaluate(angleValue));
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -68,5 +70,6 @@ public class ControlBottle : MonoBehaviour
         renderMask.material.SetFloat("_ScaleAndRotation",scaleAndRorationCurve.Evaluate(angleValue));
         renderMask.material.SetFloat("_FillAmount",fillAmountCurve.Evaluate(angleValue));
         renderMask.material.SetFloat("_Shadow",shadowCurve.Evaluate(angleValue));
+        renderMask.material.SetFloat("_Thick",thickCurve.Evaluate(angleValue));
     }
 }

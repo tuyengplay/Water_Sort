@@ -71,9 +71,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _FillAmount: 0.1
-    - _ScaleAndRotation: 0.6
-    - _Shadow: 6.3
+    - _FillAmount: 0.35
+    - _ScaleAndRotation: 1
+    - _Shadow: 3
+    - _Thick: -0.05
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color01: {r: 1, g: 0.9060749, b: 0, a: 1}
