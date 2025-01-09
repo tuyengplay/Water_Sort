@@ -20,6 +20,10 @@ namespace WaterSort
 
         private void Start()
         {
+            colorInBottle.Push(ItemID.ColorBrown);
+            colorInBottle.Push(ItemID.ColorBlue);
+            colorInBottle.Push(ItemID.ColorBrown);
+            colorInBottle.Push(ItemID.ColorBrown);
             SetColor();
         }
 
@@ -39,7 +43,7 @@ namespace WaterSort
             {
                 renderMask.material.SetColor($"_Color0{i + 1}", DataColorManager.Instance.GetData(array[i]).ColorMain);
             }
-            renderMask.material.SetColor("_ColorShadow", DataColorManager.Instance.GetData(array[length-1]).ColorMain);
+            renderMask.material.SetColor("_ColorShadow", DataColorManager.Instance.GetData(array[length-1]).ColorShadow);
         }
 
         private IEnumerator IE_RotateBottle()
