@@ -6,16 +6,8 @@ namespace WaterSort
 {
     public class ControlBottle : MonoBehaviour
     {
-        private Stack<Color> colorInBottle = new Stack<Color>();
+        private Stack<ItemID> colorInBottle = new Stack<ItemID>();
         [SerializeField] private SpriteRenderer renderMask;
-
-        [SerializeField] private Color[] colors = new[]
-        {
-            Color.yellow,
-            Color.blue,
-            Color.red,
-            Color.green,
-        };
 
         private float timeRotation = 5f;
         [SerializeField] private AnimationCurve scaleAndRorationCurve;
@@ -41,12 +33,13 @@ namespace WaterSort
 
         private void SetColor()
         {
-            for (int i = 0; i < colors.Length; i++)
+            ItemID[] array = colorInBottle.ToArray();
+            int length = array.Length;
+            for (int i = 0; i < length; i++)
             {
-                renderMask.material.SetColor($"_Color0{i + 1}", colors[i]);
+                renderMask.material.SetColor($"_Color0{i + 1}", DataColorManager.Instance.GetData(array[i]).ColorMain);
             }
-
-            renderMask.material.SetColor("_ColorShadow", Color.white);
+            renderMask.material.SetColor("_ColorShadow", DataColorManager.Instance.GetData(array[length-1]).ColorMain);
         }
 
         private IEnumerator IE_RotateBottle()
