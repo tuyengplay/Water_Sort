@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6fc4aa5144756040a3ce44afd1a85df, type: 3}
+  m_Name: DataColorManager
+  m_EditorClassIdentifier: 
+  load: 0
+  colors:
+  - idColor: 100
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 101
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 102
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 103
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 104
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 105
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 106
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 107
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 108
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
+  - idColor: 109
+    colorMain: {r: 0, g: 0, b: 0, a: 0}
+    colorShadow: {r: 0, g: 0, b: 0, a: 0}
