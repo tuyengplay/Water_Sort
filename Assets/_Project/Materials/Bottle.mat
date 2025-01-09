@@ -71,16 +71,16 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _FillAmount: 0.15
-    - _ScaleAndRotation: 1
-    - _Shadow: 3
+    - _FillAmount: 0.1
+    - _ScaleAndRotation: 0.6
+    - _Shadow: 6.3
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color01: {r: 1, g: 0.9060749, b: 0, a: 1}
     - _Color02: {r: 0.10196077, g: 0.8509804, b: 0.5772691, a: 1}
     - _Color03: {r: 1, g: 0, b: 0.03836775, a: 1}
     - _Color04: {r: 0.062745094, g: 0.096905045, b: 1, a: 1}
-    - _ColorShadow: {r: 0.21226418, g: 0.37019, b: 1, a: 0.3764706}
+    - _ColorShadow: {r: 0.36492553, g: 1, b: 0.2117647, a: 1}
     - _Color_01: {r: 1, g: 0.039973527, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
