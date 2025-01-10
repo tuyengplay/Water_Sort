@@ -6,6 +6,7 @@ namespace WaterSort
 {
     public enum ItemID
     {
+        None,
         //Color
         ColorRed = 100,
         ColorBlue,
