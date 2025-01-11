@@ -12,6 +12,9 @@ namespace WaterSort
         [SerializeField] private Camera cam;
         private ControlBottle bottleCurrent;
 
+        [SerializeField] private DataSpawn[] dataTemp;
+        [SerializeField] private ControlBottle[] aas;
+
         public ControlBottle BottleCurrent
         {
             get => bottleCurrent;
@@ -52,8 +55,10 @@ namespace WaterSort
             if (hit.collider != null)
             {
                 ControlBottle temp = hit.collider.GetComponent<ControlBottle>();
-                if (temp != null && temp.ColorTop == bottleCurrent.CanReceive)
+                if (temp != null && (temp.CanReceive == bottleCurrent.ColorTop || temp.CanReceive == ItemID.ColorEnd))
                 {
+                    bottleCurrent.Target = temp;
+                    bottleCurrent = null;
                 }
                 else
                 {
@@ -92,6 +97,10 @@ namespace WaterSort
             Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.ExclusiveFullScreen, 120);
             Application.targetFrameRate = 120;
 #endif
+            for (int i = 0; i < aas.Length; i++)
+            {
+                aas[i].Init(dataTemp[i].dataInBottle);
+            }
         }
 
         private Touch onlyTouch;
@@ -120,5 +129,11 @@ namespace WaterSort
         }
 
         #endregion
+    }
+
+    [System.Serializable]
+    public class DataSpawn
+    {
+        public ItemID[] dataInBottle;
     }
 }
