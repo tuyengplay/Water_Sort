@@ -11,14 +11,13 @@ namespace WaterSort
         private Stack<ItemID> colorInBottle = new Stack<ItemID>();
         [SerializeField] private SpriteRenderer renderMask;
 
-        private float timeRotation = 1f;
         [SerializeField] private AnimationCurve scaleAndRorationCurve;
         [SerializeField] private AnimationCurve fillAmountCurve;
         [SerializeField] private AnimationCurve shadowCurve;
         [SerializeField] private AnimationCurve thickCurve;
         private Vector3 posRoot;
         private static float[] fillAmounts = new[] { -0.55f, -0.25f, -0.05f, 0.15f, 0.35f };
-        private static float[] rotationValues = new[] { 54f, 71f, 83f, 90f };
+        private static float[] rotationValues = new[] { 0, 54f, 71f, 83f, 90f };
         private int idAnimAdd = 0;
         private bool animRunning;
         [SerializeField] private Collider2D coll;
@@ -31,12 +30,13 @@ namespace WaterSort
                 {
                     int countAdd = 0;
                     ItemID top = ColorTop;
-                    foreach (ItemID temp in colorInBottle)
+                    for (int i = 0; i < colorInBottle.Count; i++)
                     {
-                        if (top == temp && value.CountCanReceive > 0)
+                        if (top == colorInBottle.Peek() && value.CountCanReceive > 0)
                         {
-                            value.AddColor(temp);
+                            value.AddColor(colorInBottle.Pop());
                             countAdd++;
+                            i--;
                         }
                         else
                         {
@@ -44,6 +44,7 @@ namespace WaterSort
                         }
                     }
 
+                    Debug.Log("Cou" + countAdd);
                     MoveTarget(value, countAdd);
                 }
             }
@@ -132,16 +133,19 @@ namespace WaterSort
         {
             float timeDrop = RhythmManager.TimeDrop(_countAdd);
             _target.UpdateFillamountAnim(timeDrop);
-            yield return IE_RotateBottle();
+            yield return IE_RotateBottle(timeDrop);
             yield return new WaitForSeconds(timeDrop);
-            OnNoSelect();
+            OnNoSelect(true);
             yield break;
         }
 
-        public void OnNoSelect()
+        public void OnNoSelect(bool _isAnim)
         {
-            StartCoroutine(RotateBottleBack(0.3f));
             transform.DOMove(posRoot, 0.3f).OnComplete(() => { coll.enabled = true; });
+            if (_isAnim)
+            {
+                StartCoroutine(RotateBottleBack(0.3f));
+            }
         }
 
         private void UpdateFillamount()
@@ -159,30 +163,33 @@ namespace WaterSort
             idAnimAdd = tween.intId;
         }
 
-        private IEnumerator IE_RotateBottle()
+        private IEnumerator IE_RotateBottle(float _timeDrop)
         {
             float time = 0;
             float lerpValue = 0;
             float angleValue = 0;
-            while (time < timeRotation)
+            float angleMin = rotationValues[5 - CountColor];
+            while (time < _timeDrop)
             {
-                lerpValue = time / timeRotation;
-                angleValue = Mathf.Lerp(0, 90, lerpValue);
+                lerpValue = time / _timeDrop;
+                angleValue = Mathf.Lerp(0, angleMin, lerpValue);
                 transform.eulerAngles = new Vector3(0, 0, angleValue);
                 renderMask.material.SetFloat("_ScaleAndRotation", scaleAndRorationCurve.Evaluate(angleValue));
                 renderMask.material.SetFloat("_FillAmount", fillAmountCurve.Evaluate(angleValue));
                 renderMask.material.SetFloat("_Shadow", shadowCurve.Evaluate(angleValue));
                 renderMask.material.SetFloat("_Thick", thickCurve.Evaluate(angleValue));
                 time += Time.deltaTime;
+                Debug.LogError(angleValue);
                 yield return new WaitForEndOfFrame();
             }
-            angleValue = 90;
+
+            angleValue = angleMin;
             transform.eulerAngles = new Vector3(0, 0, angleValue);
-            renderMask.material.SetFloat("_FillAmount", fillAmountCurve.Evaluate(angleValue));
             renderMask.material.SetFloat("_ScaleAndRotation", scaleAndRorationCurve.Evaluate(angleValue));
             renderMask.material.SetFloat("_Shadow", shadowCurve.Evaluate(angleValue));
             renderMask.material.SetFloat("_Thick", thickCurve.Evaluate(angleValue));
         }
+
         IEnumerator RotateBottleBack(float _timeback)
         {
             float t = 0;
@@ -191,7 +198,7 @@ namespace WaterSort
             while (t < _timeback)
             {
                 lerpValue = t / _timeback;
-                angleValue = Mathf.Lerp(90,0, lerpValue);
+                angleValue = Mathf.Lerp(90, 0, lerpValue);
                 transform.eulerAngles = new Vector3(0, 0, angleValue);
                 renderMask.material.SetFloat("_ScaleAndRotation", scaleAndRorationCurve.Evaluate(angleValue));
                 renderMask.material.SetFloat("_Shadow", shadowCurve.Evaluate(angleValue));
@@ -199,6 +206,7 @@ namespace WaterSort
                 t += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
+
             angleValue = 0;
             transform.eulerAngles = new Vector3(0, 0, angleValue);
             renderMask.material.SetFloat("_ScaleAndRotation", scaleAndRorationCurve.Evaluate(angleValue));

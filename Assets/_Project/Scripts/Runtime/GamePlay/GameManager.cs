@@ -75,7 +75,7 @@ namespace WaterSort
         {
             if (BottleCurrent != null)
             {
-                BottleCurrent.OnNoSelect();
+                BottleCurrent.OnNoSelect(false);
                 BottleCurrent = null;
             }
         }
